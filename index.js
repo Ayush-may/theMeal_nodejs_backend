@@ -12,7 +12,7 @@ const { auth } = require("./middleware/auth");
 const PORT = process.env.PORT || 8001;
 
 var corsOptions = {
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_BASE_URL | "http://localhost:5173",
     optionsSuccessStatus: 200,
     credentials: true,
 };
@@ -21,14 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-// mongoConnect(`mongodb://127.0.0.1:27017/ingredient_ecommerce`).then(() =>
-//  console.log("mongoDb is connected")
-// );
-
 const mongoUser = encodeURIComponent(process.env.MONGO_USER);
 const mongoPass = encodeURIComponent(process.env.MONGO_PASS);
+const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPass}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority&appName=theMeal`;
 
-mongoConnect(`mongodb+srv://${mongoUser}:${mongoPass}@themeal.f86ot.mongodb.net/?retryWrites=true&w=majority&appName=theMeal`)
+mongoConnect(mongoUrl)
     .then(() =>
         console.log("mongoDb is connected")
     );
