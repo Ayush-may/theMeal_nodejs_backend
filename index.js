@@ -37,12 +37,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const mongoUser = encodeURIComponent(process.env.MONGO_USER);
 const mongoPass = encodeURIComponent(process.env.MONGO_PASS);
-const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPass}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority&appName=theMeal`;
+const mongoDB = process.env.MONGO_CLUSTER;
+const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPass}@${mongoDB}/?retryWrites=true&w=majority&appName=theMeal`;
 
-mongoConnect(mongoUrl)
-    .then(() =>
-        console.log("mongoDb is connected")
-    );
+mongoConnect(mongoUrl).then(() => console.log("mongoDb is connected"));
 
 app.get("/", (req, res) => {
     res.send("App is working!");
