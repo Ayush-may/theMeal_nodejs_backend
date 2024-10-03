@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 8001;
 
 const corsOptions = {
     origin: function (origin, callback) {
-        const allowedOrigins = [process.env.FRONTEND_BASE_URL, "http://localhost:5173"];
+        // const allowedOrigins = [process.env.FRONTEND_BASE_URL, "http://localhost:5173"].filter(Boolean);
+        const allowedOrigins = ["http://localhost:5173"].filter(Boolean);
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
