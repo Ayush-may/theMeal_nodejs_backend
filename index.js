@@ -9,6 +9,7 @@ const cartRouter = require("./routes/cart");
 const mongoConnect = require("./connection/mongoConnection");
 const cookieParser = require("cookie-parser");
 const { auth } = require("./middleware/auth");
+const User = require("./model/user");
 const PORT = process.env.PORT || 8001;
 
 var corsOptions = {
@@ -49,9 +50,17 @@ app.get("/", (req, res) => {
     res.send("App is working!");
 });
 
+app.get('/users', async (req, res) => {
+    try {
+        const data = await User.find({});
+        res.json(data);
+    } catch (error) {
+
+    }
+})
+
 // auth the user
 app.get("/authuser", auth, (req, res) => {
-    console.log('this is running')
     res.status(200).send("OK");
 });
 
