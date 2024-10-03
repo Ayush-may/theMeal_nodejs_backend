@@ -12,7 +12,7 @@ const { auth } = require("./middleware/auth");
 const PORT = process.env.PORT || 8001;
 
 var corsOptions = {
-    origin: process.env.FRONTEND_BASE_URL | "http://localhost:5173",
+    origin: [process.env.FRONTEND_BASE_URL | "http://localhost:5173"],
     optionsSuccessStatus: 200,
     credentials: true,
 };
