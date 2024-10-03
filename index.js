@@ -11,25 +11,26 @@ const cookieParser = require("cookie-parser");
 const { auth } = require("./middleware/auth");
 const PORT = process.env.PORT || 8001;
 
-// var corsOptions = {
-//     origin: [process.env.FRONTEND_BASE_URL | "http://localhost:5173"],
-//     optionsSuccessStatus: 200,
-//     credentials: true,
-// };
-
-const corsOptions = {
-    origin: function (origin, callback) {
-        // const allowedOrigins = [process.env.FRONTEND_BASE_URL, "http://localhost:5173"].filter(Boolean);
-        const allowedOrigins = ["http://localhost:5173"].filter(Boolean);
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,  // This allows credentials (cookies, etc.) to be sent
-    optionsSuccessStatus: 200
+var corsOptions = {
+    // origin: [process.env.FRONTEND_BASE_URL | "http://localhost:5173"],
+    origin: "http://localhost:5173",
+    optionsSuccessStatus: 200,
+    credentials: true,
 };
+
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         // const allowedOrigins = [process.env.FRONTEND_BASE_URL, "http://localhost:5173"].filter(Boolean);
+//         const allowedOrigins = "http://localhost:5173";
+//         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true,  // This allows credentials (cookies, etc.) to be sent
+//     optionsSuccessStatus: 200
+// };
 
 app.use(cors(corsOptions));
 app.use(express.json());
